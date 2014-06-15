@@ -1,5 +1,5 @@
 # Add more folders to ship with the application, here
-folder_01.source = qml2
+folder_01.source = ../opennest/qml
 folder_02.source = ../opennest/icons
 fonts.source = fonts
 DEPLOYMENTFOLDERS = folder_01 folder_02
@@ -21,5 +21,5 @@ SOURCES += main.cpp
 # target.path =
 
 # Please do not modify the following two lines. Required for deployment.
-include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
+include(qtquick1applicationviewer/qtquick1applicationviewer.pri)
 qtcAddDeployment()
