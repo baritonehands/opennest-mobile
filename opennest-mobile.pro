@@ -15,7 +15,8 @@ ios {
 OTHER_FILES += copyqml.sh OpenNest.plist
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    triangle.cpp
 
 # Installation path
 # target.path =
@@ -23,3 +24,6 @@ SOURCES += main.cpp
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick1applicationviewer/qtquick1applicationviewer.pri)
 qtcAddDeployment()
+
+HEADERS += \
+    triangle.h

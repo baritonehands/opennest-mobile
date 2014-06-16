@@ -15,7 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "qtquick1applicationviewer.h"
+#include "triangle.h"
 #include <QApplication>
+
+class QDeclarativeItem;
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +29,14 @@ int main(int argc, char *argv[])
     viewer.setOrientation(QtQuick1ApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/nest.qml"));
     viewer.showExpanded();
+
+    QGraphicsObject *rootObject = viewer.rootObject();
+
+    QDeclarativeItem *upArrow = rootObject->findChild<QDeclarativeItem *>("upArrow");
+    Triangle up(upArrow);
+
+    QDeclarativeItem *downArrow = rootObject->findChild<QDeclarativeItem *>("downArrow");
+    Triangle down(downArrow);
 
     return app.exec();
 }
