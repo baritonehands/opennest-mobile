@@ -16,6 +16,7 @@
 */
 #include "qtquick1applicationviewer.h"
 #include "triangle.h"
+#include "remotestate.h"
 #include <QApplication>
 
 class QDeclarativeItem;
@@ -26,8 +27,8 @@ int main(int argc, char *argv[])
 
     QtQuick1ApplicationViewer viewer;
     viewer.addImportPath(QLatin1String("modules"));
-    viewer.setOrientation(QtQuick1ApplicationViewer::ScreenOrientationAuto);
-    viewer.setMainQmlFile(QLatin1String("qml/nest.qml"));
+    viewer.setOrientation(QtQuick1ApplicationViewer::ScreenOrientationLockLandscape);
+    viewer.setMainQmlFile(QLatin1String("qrc:/opennest/qml/nest.qml"));
     viewer.showExpanded();
 
     QGraphicsObject *rootObject = viewer.rootObject();
@@ -37,6 +38,9 @@ int main(int argc, char *argv[])
 
     QDeclarativeItem *downArrow = rootObject->findChild<QDeclarativeItem *>("downArrow");
     Triangle down(downArrow);
+
+    QDeclarativeItem *thermostatView = rootObject->findChild<QDeclarativeItem *>("thermostatView");
+    RemoteState remote(thermostatView);
 
     return app.exec();
 }

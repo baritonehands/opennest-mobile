@@ -1,8 +1,6 @@
 # Add more folders to ship with the application, here
-folder_01.source = ../opennest/qml
-folder_02.source = ../opennest/icons
 fonts.source = fonts
-DEPLOYMENTFOLDERS = folder_01 folder_02
+DEPLOYMENTFOLDERS =
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
@@ -12,18 +10,26 @@ ios {
     DEPLOYMENTFOLDERS += fonts
 }
 
-OTHER_FILES += copyqml.sh OpenNest.plist
+OTHER_FILES += copyqml.sh OpenNest.plist \
+    android/AndroidManifest.xml
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    triangle.cpp
+    triangle.cpp \
+    remotestate.cpp
+
+RESOURCES += qml.qrc
 
 # Installation path
 # target.path =
 
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick1applicationviewer/qtquick1applicationviewer.pri)
-qtcAddDeployment()
+# Default rules for deployment.
+include(deployment.pri)
 
 HEADERS += \
-    triangle.h
+    triangle.h \
+    remotestate.h
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
