@@ -13,7 +13,7 @@
 #include <QDeclarativeComponent>
 #include <QDeclarativeEngine>
 #include <QDeclarativeContext>
-
+#include <QDebug>
 
 QtQuick1ApplicationViewer::QtQuick1ApplicationViewer(QWidget *parent)
     : QDeclarativeView(parent)

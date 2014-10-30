@@ -18,6 +18,10 @@
 #include "triangle.h"
 #include "remotestate.h"
 #include <QApplication>
+#include <QScreen>
+#include <QDesktopWidget>
+#include <QDeclarativeContext>
+#include <QDebug>
 
 class QDeclarativeItem;
 
@@ -26,12 +30,28 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QtQuick1ApplicationViewer viewer;
+    viewer.rootContext()->setContextProperty("dp", 1);
     viewer.addImportPath(QLatin1String("modules"));
     viewer.setOrientation(QtQuick1ApplicationViewer::ScreenOrientationLockLandscape);
     viewer.setMainQmlFile(QLatin1String("qrc:/opennest/qml/nest.qml"));
     viewer.showExpanded();
 
+    QSizeF size = QSizeF(QApplication::desktop()->screenGeometry().size());
     QGraphicsObject *rootObject = viewer.rootObject();
+
+    qDebug() << QApplication::primaryScreen()->devicePixelRatio();
+    if(size.width() / 320.0 <= size.height() / 240.0)
+    {
+        float ratio = size.width() / 320.0;
+        viewer.rootContext()->setContextProperty("dp", ratio);
+        qDebug() << "Scaling " << ratio;
+    }
+    else
+    {
+        float ratio = size.height() / 240.0;
+        viewer.rootContext()->setContextProperty("dp", ratio);
+        qDebug() << "Scaling " << ratio;
+    }
 
     QDeclarativeItem *upArrow = rootObject->findChild<QDeclarativeItem *>("upArrow");
     Triangle up(upArrow);

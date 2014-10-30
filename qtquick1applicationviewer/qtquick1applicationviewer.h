@@ -12,6 +12,8 @@
 #define QTQUICK1APPLICATIONVIEWER_H
 
 #include <QDeclarativeView>
+#include <QResizeEvent>
+#include <QGraphicsObject>
 
 class QtQuick1ApplicationViewer : public QDeclarativeView
 {
