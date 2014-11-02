@@ -30,34 +30,35 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QtQuick1ApplicationViewer viewer;
-    viewer.rootContext()->setContextProperty("dp", 1);
     viewer.addImportPath(QLatin1String("modules"));
     viewer.setOrientation(QtQuick1ApplicationViewer::ScreenOrientationLockLandscape);
-    viewer.setMainQmlFile(QLatin1String("qrc:/opennest/qml/nest.qml"));
-    viewer.showExpanded();
 
     QSizeF size = QSizeF(QApplication::desktop()->screenGeometry().size());
-    QGraphicsObject *rootObject = viewer.rootObject();
 
-    qDebug() << QApplication::primaryScreen()->devicePixelRatio();
+    double dp = 1.0;
     if(size.width() / 320.0 <= size.height() / 240.0)
     {
-        float ratio = size.width() / 320.0;
-        viewer.rootContext()->setContextProperty("dp", ratio);
-        qDebug() << "Scaling " << ratio;
+        dp = size.width() / 320.0;
     }
     else
     {
-        float ratio = size.height() / 240.0;
-        viewer.rootContext()->setContextProperty("dp", ratio);
-        qDebug() << "Scaling " << ratio;
+        dp = size.height() / 240.0;
     }
+    viewer.rootContext()->setContextProperty("dp", dp);
+    qDebug() << "dp = " << dp;
+
+    viewer.setMainQmlFile(QLatin1String("qrc:/opennest/qml/nest.qml"));
+    viewer.showExpanded();
+
+    QGraphicsObject *rootObject = viewer.rootObject();
 
     QDeclarativeItem *upArrow = rootObject->findChild<QDeclarativeItem *>("upArrow");
     Triangle up(upArrow);
+    up.setDp(dp);
 
     QDeclarativeItem *downArrow = rootObject->findChild<QDeclarativeItem *>("downArrow");
     Triangle down(downArrow);
+    down.setDp(dp);
 
     QDeclarativeItem *thermostatView = rootObject->findChild<QDeclarativeItem *>("thermostatView");
     RemoteState remote(thermostatView);

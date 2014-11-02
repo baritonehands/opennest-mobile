@@ -12,6 +12,7 @@ class Triangle : public QDeclarativeItem
     Q_OBJECT
     Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(QColor borderColor READ borderColor WRITE setBorderColor)
+    Q_PROPERTY(double dp READ dp WRITE setDp)
 
 public:
     explicit Triangle(QDeclarativeItem *parent = 0);
@@ -38,6 +39,16 @@ public:
         update();
     }
 
+    double dp() const
+    {
+        return m_dp;
+    }
+
+    void setDp(double dp)
+    {
+        m_dp = dp;
+    }
+
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
 
 signals:
@@ -46,6 +57,7 @@ public slots:
 
 private:
     QColor m_color, m_borderColor;
+    double m_dp;
 };
 
 #endif // TRIANGLE_H
