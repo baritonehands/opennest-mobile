@@ -12,7 +12,7 @@
 	<string>opennest-mobile</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>fonts/Bariol_Regular.ttf</string>
+                <string>fonts/Bariol_Regular.ttf</string>
 	</array>
 	<key>CFBundleGetInfoString</key>
 	<string>Created by Qt/QMake</string>

@@ -1,5 +1,4 @@
 # Add more folders to ship with the application, here
-fonts.source = fonts
 DEPLOYMENTFOLDERS =
 
 # Additional import path used to resolve QML modules in Creator's code model
@@ -7,7 +6,9 @@ QML_IMPORT_PATH =
 
 ios {
     QMAKE_INFO_PLIST = OpenNest.plist
-    DEPLOYMENTFOLDERS += fonts
+    fontFiles.files = fonts/Bariol_Regular.ttf
+    fontFiles.path = fonts
+    QMAKE_BUNDLE_DATA += fontFiles
 }
 
 OTHER_FILES += copyqml.sh OpenNest.plist \
